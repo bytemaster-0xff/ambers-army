@@ -40,10 +40,16 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Interfaces\ILicensePlateReader.cs" />
+    <Compile Include="Interfaces\ITimer.cs" />
+    <Compile Include="Interfaces\ITimerFactory.cs" />
     <Compile Include="Models\Alert.cs" />
     <Compile Include="Models\FoundPlates.cs" />
     <Compile Include="Models\GeoLocation.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\OCRLine.cs" />
+    <Compile Include="Models\OCRResult.cs" />
+    <Compile Include="Models\OCRWord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FlowClient.cs" />
     <Compile Include="Services\M2XService.cs" />

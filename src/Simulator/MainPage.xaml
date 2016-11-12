@@ -6,6 +6,7 @@
     xmlns:vms="using:AmbersArmy.Core.ViewModels"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ctl="using:AmbersArmy.UWP.Common.Controls"
     mc:Ignorable="d">
     <Page.Resources>
         <vms:Spotter x:Key="Spotter1" SpotterId="ABC11111" />
@@ -13,9 +14,23 @@
         <vms:Spotter x:Key="Spotter3" SpotterId="ABC33333" />
         <vms:Spotter x:Key="Spotter4" SpotterId="ABC44444" />
         <vms:Spotter x:Key="Spotter5" SpotterId="ABC55555" />
+        <vms:Spotter x:Key="Spotter6" SpotterId="ABC66666" />
     </Page.Resources>
-    
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{StaticResource Spotter1}">
-        <Button Command="{Binding PostDataCommand}" Content="PushData" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <ctl:SpotterUI DataContext="{StaticResource Spotter1}" />
+        <ctl:SpotterUI DataContext="{StaticResource Spotter2}" Grid.Column="1" />
+        <ctl:SpotterUI DataContext="{StaticResource Spotter3}" Grid.Column="2"/>
+        <ctl:SpotterUI DataContext="{StaticResource Spotter4}" Grid.Column="3"/>
+        <ctl:SpotterUI DataContext="{StaticResource Spotter5}" Grid.Column="4"/>
+        <ctl:SpotterUI DataContext="{StaticResource Spotter6}" Grid.Column="6"/>
     </Grid>
 </Page>

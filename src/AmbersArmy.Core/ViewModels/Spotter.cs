@@ -16,7 +16,11 @@ namespace AmbersArmy.Core.ViewModels
 
         public Spotter()
         {
-            PostDataCommand = new RelayCommand(PostLocation);
+            PostLocationCommand = new RelayCommand(PostLocation);
+            CurrentLocation = new GeoLocation()
+            {
+
+            };
         }
 
         public GeoLocation CurrentLocation { get; set; }
@@ -36,6 +40,6 @@ namespace AmbersArmy.Core.ViewModels
             await _flowClient.PostLocationAsync(location);
         }
 
-        public ICommand PostDataCommand { get; private set; }
+        public ICommand PostLocationCommand { get; private set; }
     }
 }
