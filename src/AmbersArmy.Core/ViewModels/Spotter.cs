@@ -1,10 +1,12 @@
 ﻿using AmbersArmy.Core.Models;
 using AmbersArmy.Core.Services;
+using AmbersArmy.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace AmbersArmy.Core.ViewModels
 {
@@ -14,14 +16,14 @@ namespace AmbersArmy.Core.ViewModels
 
         public Spotter()
         {
-
+            PostDataCommand = new RelayCommand(PostLocation);
         }
 
         public GeoLocation CurrentLocation { get; set; }
 
         public String SpotterId { get; set; }
 
-        public Task PostLocation()
+        public async void PostLocation()
         {
             var location = new Models.Location()
             {
@@ -31,7 +33,9 @@ namespace AmbersArmy.Core.ViewModels
                 TimeStamp = DateTime.Now.ToJSONString()
             };
 
-            return _flowClient.PostLocationAsync(location);
+            await _flowClient.PostLocationAsync(location);
         }
+
+        public ICommand PostDataCommand { get; private set; }
     }
 }

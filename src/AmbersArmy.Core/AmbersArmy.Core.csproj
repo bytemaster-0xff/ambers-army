@@ -45,6 +45,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FlowClient.cs" />
+    <Compile Include="Utils\RelayCommand.cs" />
     <Compile Include="ViewModels\Spotter.cs" />
   </ItemGroup>
   <ItemGroup>
