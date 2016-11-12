@@ -1,4 +1,5 @@
-﻿<Page xmlns:my="using:Bing.Maps" 
+﻿<Page 
+	xmlns:my="using:Bing.Maps"
     x:Class="CIC.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -14,6 +15,6 @@
             <ColumnDefinition Width="200" />
         </Grid.ColumnDefinitions>
 		<TextBlock Name="M2xResult" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" />
-		<my:Map />
+		<!--<my:Map />-->
 	</Grid>
 </Page>
