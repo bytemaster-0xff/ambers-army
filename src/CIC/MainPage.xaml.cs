@@ -12,7 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using M2X.PCL;
+using AmbersArmy.Core.Services;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -33,11 +33,12 @@ namespace CIC
 		{
 			base.OnNavigatedTo(e);
 
-			var ops = new Operations();
-			var result = await ops.GetDeviceStream("6e7bb7923219c6b72728cb1a34d0d5b6", "Temp");
+			var svc = new M2XService();
+			var result = await svc.GetDeviceStream("6e7bb7923219c6b72728cb1a34d0d5b6", "Temp");
 
 			var foo = result;
 			var fooCheck = string.IsNullOrWhiteSpace(result);
+			M2xResult.Text = result;
 		}
 	}
 }

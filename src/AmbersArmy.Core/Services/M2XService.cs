@@ -4,16 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATTM2X;
-using ATTM2X.Classes;
 using Newtonsoft.Json;
 
-namespace M2X.PCL
+namespace AmbersArmy.Core.Services
 {
-	public class Operations
+	public class M2XService
 	{
+		private string M2XMasterApiKey { get; set; }
+
+		public M2XService(string m2xMasterApiKey = null)
+		{
+			M2XMasterApiKey = !string.IsNullOrWhiteSpace(m2xMasterApiKey)
+				? m2xMasterApiKey
+				: Constants.M2XMasterApiKey;
+		}
+
 		public async Task<string> GetDeviceStream(string deviceId, string streamName)
 		{
-			var m2xClient = new M2XClient(Constants.M2XMasterApiKey);
+			var m2xClient = new M2XClient(M2XMasterApiKey);
 			var device = m2xClient.Device(deviceId);
 			var stream = device.Stream(streamName);
 			var requestResult = await stream.Values();

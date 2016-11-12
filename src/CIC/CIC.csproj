@@ -128,9 +128,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\M2X.PCL\M2X.PCL.csproj">
-      <Project>{2dcc82fd-e696-47d7-b562-bcae26e7f42c}</Project>
-      <Name>M2X.PCL</Name>
+    <ProjectReference Include="..\AmbersArmy.Core\AmbersArmy.Core.csproj">
+      <Project>{59b6160a-a7d3-4022-95b0-bf134c95cf63}</Project>
+      <Name>AmbersArmy.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace M2X.PCL
+﻿namespace AmbersArmy.Core
 {
 	public static class Constants
     {
