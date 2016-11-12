@@ -11,7 +11,7 @@ namespace AmbersArmy.UWP.Common.Services
     {
         public ITimer CreateTimer(TimeSpan interval)
         {
-            throw new NotImplementedException();
+            return new Timer(interval);
         }
     }
 }
