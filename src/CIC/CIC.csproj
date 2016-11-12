@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{85b2e4a6-72a1-4f05-ba1f-96930742a7f2}</ProjectGuid>
+    <ProjectGuid>{85B2E4A6-72A1-4F05-BA1F-96930742A7F2}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CIC</RootNamespace>
@@ -16,9 +16,8 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    
     <PackageCertificateKeyFile>CIC_TemporaryKey.pfx</PackageCertificateKeyFile>
-    
+    <PackageCertificateThumbprint>2DC8E8DF2671DBB1977C57D28C6EDA161BFED8BE</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -106,9 +105,7 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    
     <None Include="CIC_TemporaryKey.pfx" />
-    
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -130,11 +127,19 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-  
+  <ItemGroup>
+    <ProjectReference Include="..\M2X.MQTT.PCL\M2X.MQTT.PCL.csproj">
+      <Project>{29c73575-843d-4aaa-9756-df6fba06dd4e}</Project>
+      <Name>M2X.MQTT.PCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\M2X.PCL\M2X.PCL.csproj">
+      <Project>{2dcc82fd-e696-47d7-b562-bcae26e7f42c}</Project>
+      <Name>M2X.PCL</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
-
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
