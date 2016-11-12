@@ -1,19 +1,60 @@
-﻿<Page xmlns:my="using:Bing.Maps" 
+﻿<Page 
     x:Class="CIC.MainPage"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CIC"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vms="using:AmbersArmy.Core.ViewModels"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <vms:CICViewModel x:Key="cicViewModel" />
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{StaticResource cicViewModel}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="240" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="240" />
         </Grid.ColumnDefinitions>
-		<TextBlock Name="M2xResult" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" />
-		<my:Map />
-	</Grid>
+        <TextBlock Name="M2xResult" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" />
+        <StackPanel Margin="10">
+            <TextBlock Text="Add Alert" FontSize="24" />
+            <TextBlock Text="Name" />
+            <TextBox Text="{Binding Alert.Name}" />
+            <TextBlock Text="BirthDate" />
+            <TextBox Text="{Binding Alert.BirthDate}" />
+            <TextBlock Text="BirthDate" />
+            <TextBox Text="{Binding Alert.Age}" />
+            <TextBlock Text="License Plate" />
+            <TextBox Text="{Binding Alert.LicensePlate}" />
+            <TextBlock Text="Vehicle" />
+            <TextBox Text="{Binding Alert.VehicleModel}" />
+            <TextBlock Text="Vehicle Color" />
+            <TextBox Text="{Binding Alert.VehicleColor}" />
+            <TextBlock Text="Vehicle Year" />
+            <TextBox Text="{Binding Alert.VehicleYear}" />
+            <TextBlock Text="Last Known Location" />
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Lat:" Width="40" />
+                <TextBox Text="{Binding Alert.LastKnownLocation.Latitude}" Width="120" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <TextBlock Text="Lon:" Width="40" />
+                <TextBox Text="{Binding Alert.LastKnownLocation.Longitude}" Width="120" />
+            </StackPanel>
+            <TextBlock Text="Last Seen" />
+            <TextBox Text="{Binding Alert.LastKnowLocationDateStamp}" />
+            <Button Command="{Binding AddAlertCommand}" Content="Post" />
+        </StackPanel>
+        <Maps:MapControl Grid.Column="1" 
+            MapServiceToken="ewvYER67ucP0e7cB7JXT~HnLDpNhXGpPpdnylVEWqxw~AkdcKUirY28K7ZVGskqnwUKrWTD_187o1eJ7tyK2t9y6xlXoGWyXDUpM_78CTxzL"
+            ZoomInteractionMode="GestureAndControl"
+            LandmarksVisible="True"
+            IsRightTapEnabled="true"
+            x:Name="TheMap" >
+        </Maps:MapControl>
+    </Grid>
 </Page>
