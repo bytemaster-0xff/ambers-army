@@ -128,15 +128,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ATTM2X">
-      <HintPath>..\_lib\ATTM2X\ATTM2X.dll</HintPath>
-    </Reference>
-    <Reference Include="ATTM2X.Mqtt">
-      <HintPath>..\_lib\ATTM2X-MQTT\ATTM2X.Mqtt.dll</HintPath>
-    </Reference>
-    <Reference Include="M2Mqtt.WinRT">
-      <HintPath>..\_lib\ATTM2X-MQTT\M2Mqtt.WinRT.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\M2X.MQTT.PCL\M2X.MQTT.PCL.csproj">
+      <Project>{29c73575-843d-4aaa-9756-df6fba06dd4e}</Project>
+      <Name>M2X.MQTT.PCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\M2X.PCL\M2X.PCL.csproj">
+      <Project>{2dcc82fd-e696-47d7-b562-bcae26e7f42c}</Project>
+      <Name>M2X.PCL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

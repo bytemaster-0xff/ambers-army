@@ -8,6 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    </Grid>
+		
+		<TextBlock Name="M2xResult" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" />
+		
+	</Grid>
 </Page>
