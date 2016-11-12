@@ -112,6 +112,8 @@
     </Compile>
     <Compile Include="LicensePlateRecog\Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Timer.cs" />
+    <Compile Include="Services\TimerFactory.cs" />
     <EmbeddedResource Include="Properties\AmbersArmy.UWP.Common.rd.xml" />
   </ItemGroup>
   <ItemGroup>
