@@ -107,7 +107,8 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Operations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\M2X.PCL.rd.xml" />
   </ItemGroup>
