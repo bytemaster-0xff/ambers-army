@@ -110,6 +110,7 @@
     <Compile Include="Controls\SpotterUI.xaml.cs">
       <DependentUpon>SpotterUI.xaml</DependentUpon>
     </Compile>
+    <Compile Include="LicensePlateRecog\Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\AmbersArmy.UWP.Common.rd.xml" />
   </ItemGroup>
