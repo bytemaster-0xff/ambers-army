@@ -10,15 +10,16 @@
     d:DesignHeight="800"
     Background="LightBlue"
     d:DesignWidth="480">
-    <UserControl.Resources>
-        <vms:Spotter  x:Key="SpotterDemoData" />
-    </UserControl.Resources>
-    <Grid d:DataContext="{StaticResource SpotterDemoData}" Background="LightBlue" >
+    <Grid Background="LightBlue" >
         <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding SpotterId}" />
         <Button Command="{Binding PostLocationCommand}" Grid.Row="1" Background="Green" HorizontalAlignment="Center" Content="Post Location"/>
+        <ListBox ItemsSource="{Binding RecognizedTags}">
+            
+        </ListBox>
     </Grid>
 </UserControl>

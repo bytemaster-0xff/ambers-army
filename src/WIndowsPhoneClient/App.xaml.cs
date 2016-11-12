@@ -1,4 +1,8 @@
-﻿using System;
+﻿using AmbersArmy.Core.Interfaces;
+using AmbersArmy.Core.Utils;
+using AmbersArmy.UWP.Common.LicensePlateRecog;
+using AmbersArmy.UWP.Common.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -46,6 +50,9 @@ namespace WIndowsPhoneClient
             }
 #endif
             Frame rootFrame = Window.Current.Content as Frame;
+
+            AAIOC.RegisterSingleton<ITimerFactory, TimerFactory>();
+            AAIOC.RegisterSingleton<ILicensePlateReader, LicensePlateReader>();
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

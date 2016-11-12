@@ -8,5 +8,7 @@ namespace AmbersArmy.Core.Interfaces
     {
         event EventHandler<OCRResult> TextRecognized;
         Task InitAsync();
+
+        Task ScanNow();
     }
 }
