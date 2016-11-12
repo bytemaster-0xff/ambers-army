@@ -23,30 +23,30 @@
         <StackPanel Margin="10">
             <TextBlock Text="Add Alert" FontSize="24" />
             <TextBlock Text="Name" />
-            <TextBox Text="{Binding Alert.Name}" />
+            <TextBox Text="{Binding Alert.Name, Mode=TwoWay}" />
             <TextBlock Text="BirthDate" />
-            <TextBox Text="{Binding Alert.BirthDate}" />
+            <TextBox Text="{Binding Alert.BirthDate, Mode=TwoWay}" />
             <TextBlock Text="BirthDate" />
-            <TextBox Text="{Binding Alert.Age}" />
+            <TextBox Text="{Binding Alert.Age, Mode=TwoWay}" />
             <TextBlock Text="License Plate" />
-            <TextBox Text="{Binding Alert.LicensePlate}" />
+            <TextBox Text="{Binding Alert.LicensePlate, Mode=TwoWay}" />
             <TextBlock Text="Vehicle" />
-            <TextBox Text="{Binding Alert.VehicleModel}" />
+            <TextBox Text="{Binding Alert.VehicleModel, Mode=TwoWay}" />
             <TextBlock Text="Vehicle Color" />
-            <TextBox Text="{Binding Alert.VehicleColor}" />
+            <TextBox Text="{Binding Alert.VehicleColor, Mode=TwoWay}" />
             <TextBlock Text="Vehicle Year" />
-            <TextBox Text="{Binding Alert.VehicleYear}" />
+            <TextBox Text="{Binding Alert.VehicleYear, Mode=TwoWay}"   />
             <TextBlock Text="Last Known Location" />
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Lat:" Width="40" />
-                <TextBox Text="{Binding Alert.LastKnownLocation.Latitude}" Width="120" />
+                <TextBox Text="{Binding Alert.LastKnownLocation.Latitude, Mode=TwoWay}" Width="120" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Text="Lon:" Width="40" />
-                <TextBox Text="{Binding Alert.LastKnownLocation.Longitude}" Width="120" />
+                <TextBox Text="{Binding Alert.LastKnownLocation.Longitude, Mode=TwoWay}" Width="120" />
             </StackPanel>
             <TextBlock Text="Last Seen" />
-            <TextBox Text="{Binding Alert.LastKnowLocationDateStamp}" />
+            <TextBox Text="{Binding Alert.LastKnowLocationDateStamp, Mode=TwoWay}" />
             <Button Command="{Binding AddAlertCommand}" Content="Post" />
         </StackPanel>
         <Maps:MapControl Grid.Column="1" 
