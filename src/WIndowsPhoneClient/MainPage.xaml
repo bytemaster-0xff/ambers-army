@@ -4,16 +4,61 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WIndowsPhoneClient"
     xmlns:vms="using:AmbersArmy.Core.ViewModels"
-    xmlns:ctl="using:AmbersArmy.UWP.Common.Controls"
+    xmlns:cvts="using:WindowsPhoneClient.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.Resources>
+        <vms:Spotter x:Key="ViewModel" x:Name="ViewModel" />
+        <cvts:VisibilityConverter x:Key="VisibilityConverter" />
+    </Page.Resources>
 
-	<Page.Resources>
-		<vms:Spotter x:Key="Spotter1" SpotterId="ACTIVEDEVICE" x:Name="ViewModel" />
-	</Page.Resources>
+    <Grid  DataContext="{StaticResource ViewModel}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<ctl:SpotterUI DataContext="{StaticResource Spotter1}" />
-	</Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+
+        <Image Width="480" Grid.Row="0"  Source="Assets/logo.jpg" />
+        <StackPanel Margin="0,20,0,20" Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center">
+            <Image  Source="Assets/AlertSymbol.png" Width="80" />
+            <Image Source="Assets/ChildAbduction.png" Width="320" />
+        </StackPanel>
+        <StackPanel Margin="0,20,0,20" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="White" FontSize="35" FontWeight="Bold"  />
+            <TextBlock Text="-" FontSize="35" FontWeight="Bold" Margin="10,0,10,0" Foreground="#E68E2D" />
+            <TextBlock Text="2010 Ford Ranger" FontSize="36" FontWeight="Bold"  />
+        </StackPanel>
+        <Image Width="480" Grid.Row="3" Source="Assets/10_FordRanger.jpg"  />
+        <Rectangle  Width="230" Grid.Row="4" Visibility="{Binding HitFound, Converter={StaticResource VisibilityConverter}}" Fill="#7F00FF00" StrokeThickness="4" RadiusX="4" RadiusY="4" Height="80" />
+        <Rectangle  Width="230" Grid.Row="4" Stroke="#E68E2D" StrokeThickness="4" RadiusX="4" RadiusY="4" Height="80" />
+        <Button Command="{Binding PlateFoundCommand}" Background="Transparent" Grid.Row="4" HorizontalAlignment="Center">
+            <Button.Content>
+            <StackPanel Grid.Row="4">
+                <TextBlock Text="GA LIC" Margin="0,0,0,-15" Grid.Row="4" HorizontalAlignment="Center" FontWeight="Bold" FontSize="24"/>
+                <TextBlock Text="EA375A" Grid.Row="4" HorizontalAlignment="Center" FontWeight="Black" FontSize="48"/>
+            </StackPanel>
+            </Button.Content>
+        </Button>
+        <Button HorizontalAlignment="Center" Command="{Binding PossibleSightingCommand}"  Grid.Row="5" Background="Transparent" Width="350" Height="180" >
+            <Button.Content>
+                <Grid>
+                    <Rectangle Width="300" Grid.Row="4" Fill="#E68E2D" Stroke="#E68E2D" StrokeThickness="6" RadiusX="6" RadiusY="6" Height="120" />
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="POSSIBLE" Foreground="White" TextAlignment="Center" FontWeight="Bold" FontSize="36" />
+                        <TextBlock Text="SIGHTING" Foreground="White" TextAlignment="Center" FontWeight="Bold" FontSize="36" />
+                    </StackPanel>
+                </Grid>
+            </Button.Content>
+        </Button>
+    </Grid>
 </Page>
