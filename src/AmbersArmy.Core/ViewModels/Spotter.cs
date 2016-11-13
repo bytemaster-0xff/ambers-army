@@ -72,8 +72,8 @@ namespace AmbersArmy.Core.ViewModels
 
                 Debug.WriteLine($"VALID => {e.AllText}");
 
-                var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
-                var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
+                var timestamp = DateTime.UtcNow.ToJSONString();//.ToString("yyyy-MM-ddTHH:mm:ssZ");
+				var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
                 await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
             }
         }
@@ -99,7 +99,7 @@ namespace AmbersArmy.Core.ViewModels
 				TimeStamp = DateTime.Now.ToJSONString()
 			});
 
-			var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
+			var timestamp = DateTime.UtcNow.ToJSONString();//.ToString("yyyy-MM-ddTHH:mm:ssZ");
 			var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
 			await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "locations", postParms);
 		}
@@ -113,7 +113,7 @@ namespace AmbersArmy.Core.ViewModels
 				TimeStamp = DateTime.Now.ToJSONString()
 			});
 
-			var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
+			var timestamp = DateTime.UtcNow.ToJSONString();//.ToString("yyyy-MM-ddTHH:mm:ssZ");
 			var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
 			await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
 		}

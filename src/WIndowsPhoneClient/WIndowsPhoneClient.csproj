@@ -110,6 +110,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\06_VWJetta.jpg" />
+    <Content Include="Assets\08_FordEscape.jpg" />
+    <Content Include="Assets\08_HondaAccord.jpg" />
+    <Content Include="Assets\09_InfinitiG37.jpg" />
+    <Content Include="Assets\10_FordRanger.jpg" />
+    <Content Include="Assets\10_JeepCherokee.jpg" />
+    <Content Include="Assets\11_MazdaSport.jpg" />
+    <Content Include="Assets\12_VolvoXC90.jpg" />
+    <Content Include="Assets\13_NissanAltima.jpg" />
+    <Content Include="Assets\16_ToyotaCamry.jpg" />
+    <Content Include="Assets\AlertSymbol.png" />
+    <Content Include="Assets\AmbersArmy-comp.jpg" />
+    <Content Include="Assets\btn.png" />
+    <Content Include="Assets\CarDetails.png" />
+    <Content Include="Assets\ChildAbduction.png" />
+    <Content Include="Assets\LIC.png" />
+    <Content Include="Assets\logo.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

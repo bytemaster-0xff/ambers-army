@@ -11,16 +11,28 @@
     Background="LightBlue"
     d:DesignWidth="480">
     <Grid Background="LightBlue" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <TextBlock Text="{Binding SpotterId}" />
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+        
+		<!--<TextBlock Text="{Binding SpotterId}" />
 		<Button Command="{Binding PostLocationCommand}" Grid.Row="1" Background="Green" HorizontalAlignment="Center" Content="Post Location"/>
 		<Button Command="{Binding PostLicensePlateCommand}" Grid.Row="2" Background="Orange" HorizontalAlignment="Center" Content="Post Plate"/>
 		<ListBox ItemsSource="{Binding RecognizedTags}">
-            
-        </ListBox>
-    </Grid>
+		    
+        </ListBox>-->
+
+		<Image Grid.Row="0" >
+			<Image.Source>
+				<BitmapImage DecodePixelWidth="1440" DecodePixelHeight="262" UriSource="Assets/logo.jpg" />
+			</Image.Source>
+		</Image>
+
+
+	</Grid>
 </UserControl>
