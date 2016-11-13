@@ -30,31 +30,12 @@ namespace WIndowsPhoneClient
         public MainPage()
         {
             this.InitializeComponent();
+            this.Loaded += MainPage_Loaded;
 		}
 
-		private OcrEngine ocrEngine;
-		private async Task DecodeRecognizeAndShow(IRandomAccessStream stream, bool isVideo = false)
-		{
-			var decoder = await BitmapDecoder.CreateAsync(stream);
-
-			if (!isVideo)
-			{
-				SoftwareBitmap bitmap = null;
-				using (bitmap = await decoder.GetSoftwareBitmapAsync())
-				{
-					var result = await ocrEngine.RecognizeAsync(bitmap);
-					//OcrResult.Text = !string.IsNullOrWhiteSpace(result.Text)
-					//	? result.Text
-					//	: "Recognition failed.  :'(";
-
-					using (var convertedBitmap = SoftwareBitmap.Convert(bitmap, BitmapPixelFormat.Bgra8, BitmapAlphaMode.Premultiplied))
-					{
-						var convertedBitmapSource = new SoftwareBitmapSource();
-						await convertedBitmapSource.SetBitmapAsync(convertedBitmap);
-						//CaptureResult.Source = convertedBitmapSource;
-					}
-				}
-			}
-		}
-	}
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            await ViewModel.InitAsync();
+        }
+    }
 }

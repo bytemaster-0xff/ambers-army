@@ -55,6 +55,7 @@
     <Compile Include="RouteSimulator\Routes.Route1.Partial.cs" />
     <Compile Include="RouteSimulator\Routes.Route2.Partial.cs" />
     <Compile Include="RouteSimulator\Routes.Route3.Partial.cs" />
+    <Compile Include="RouteSimulator\SampleVehicle.cs" />
     <Compile Include="Services\FlowClient.cs" />
     <Compile Include="Services\M2XService.cs" />
     <Compile Include="Utils\AAIOC.cs" />

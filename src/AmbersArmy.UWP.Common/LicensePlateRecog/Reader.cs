@@ -58,11 +58,16 @@ namespace AmbersArmy.UWP.Common.LicensePlateRecog
                 }
             }
 
+            var start = DateTime.Now;
+            Debug.WriteLine("Start >>");
             using (var captureStream = new InMemoryRandomAccessStream())
             {
                 await _mediaCapture.CapturePhotoToStreamAsync(ImageEncodingProperties.CreateJpeg(), captureStream);
                 await DecodeRecognizeAndShow(captureStream);
             }
+
+            var delta = DateTime.Now - start;
+            Debug.WriteLine($"End => Elapsed {delta.TotalMilliseconds} ms");
         }
 
         private async Task DecodeRecognizeAndShow(IRandomAccessStream stream)

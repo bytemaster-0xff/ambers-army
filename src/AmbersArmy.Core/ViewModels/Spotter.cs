@@ -25,25 +25,23 @@ namespace AmbersArmy.Core.ViewModels
             PostLocationCommand = new RelayCommand(PostLocation);
             CurrentLocation = new GeoLocation()
             {
-                 Latitude = 36.99,
-                 Longitude = -86.0
+                Latitude = 36.99,
+                Longitude = -86.0
             };
 
-            _timer = AAIOC.Get<ITimerFactory>().CreateTimer(TimeSpan.FromSeconds(5));
-            _timer.Elapsed += _timer_Elapsed;
-          
+           
             _plateReader = AAIOC.Get<Interfaces.ILicensePlateReader>();
             _plateReader.TextRecognized += _plateReader_TextRecognized;
             _recognizedTags = new ObservableCollection<string>();
-
-            InitAsync();
         }
 
-        public async void InitAsync()
+        public async Task InitAsync()
         {
             Debug.WriteLine("INITTING READER");
-           // await _plateReader.InitAsync();
-         //   _timer.Start();
+            await _plateReader.InitAsync();
+            _timer = AAIOC.Get<ITimerFactory>().CreateTimer(TimeSpan.FromSeconds(1));
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
             Debug.WriteLine("WE INIT SO START TIMER!");
         }
 
@@ -54,8 +52,9 @@ namespace AmbersArmy.Core.ViewModels
 
         private async void _timer_Elapsed(object sender, EventArgs e)
         {
-            Debug.WriteLine("TIMER HAS FIRED!");
-            await _plateReader.ScanNow();
+            _timer.Stop();
+             await _plateReader.ScanNow();
+            _timer.Start();
         }
 
         public GeoLocation CurrentLocation { get; set; }
