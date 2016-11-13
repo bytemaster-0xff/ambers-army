@@ -29,7 +29,7 @@ namespace AmbersArmy.Core.ViewModels
                 Longitude = -86.0
             };
 
-           
+
             _plateReader = AAIOC.Get<Interfaces.ILicensePlateReader>();
             _plateReader.TextRecognized += _plateReader_TextRecognized;
             _recognizedTags = new ObservableCollection<string>();
@@ -47,13 +47,28 @@ namespace AmbersArmy.Core.ViewModels
 
         private void _plateReader_TextRecognized(object sender, OCRResult e)
         {
-            _recognizedTags.Add(e.AllText);
+            if (String.IsNullOrEmpty(e.AllText))
+            {
+                Debug.WriteLine("MISSING");
+            }
+            else
+            {
+                _flowClient.PostLicensePlateAysnc(new Models.FoundPlate()
+                {
+                    Plate = e.AllText,
+                    DeviceId = SpotterId,
+                    TimeStamp = DateTime.Now.ToJSONString(),
+                    Location = new GeoLocation() { Latitude = 34.3, Longitude = 33.3 }
+                });
+
+                Debug.WriteLine($"VALID => {e.AllText}");
+            }
         }
 
         private async void _timer_Elapsed(object sender, EventArgs e)
         {
             _timer.Stop();
-             await _plateReader.ScanNow();
+            await _plateReader.ScanNow();
             _timer.Start();
         }
 
