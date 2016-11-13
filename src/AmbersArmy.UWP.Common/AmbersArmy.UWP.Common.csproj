@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="LicensePlateRecog\Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\M2XMqttService.cs" />
     <Compile Include="Services\Timer.cs" />
     <Compile Include="Services\TimerFactory.cs" />
     <EmbeddedResource Include="Properties\AmbersArmy.UWP.Common.rd.xml" />
@@ -127,6 +128,15 @@
       <Project>{59b6160a-a7d3-4022-95b0-bf134c95cf63}</Project>
       <Name>AmbersArmy.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ATTM2X.Mqtt">
+      <HintPath>..\_lib\ATTM2X-MQTT\ATTM2X.Mqtt.dll</HintPath>
+    </Reference>
+    <Reference Include="M2Mqtt.WinRT, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\_lib\ATTM2X-MQTT\M2Mqtt.WinRT.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
