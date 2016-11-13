@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ATTM2X;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace AmbersArmy.Core.ViewModels
 {
@@ -19,8 +21,9 @@ namespace AmbersArmy.Core.ViewModels
 		FlowClient _flowClient = new FlowClient();
 		Interfaces.ILicensePlateReader _plateReader;
 		Interfaces.ITimer _timer;
-		Interfaces.IM2XMqttService _m2xMqttService;
+		M2XService _m2xService;
 		private ObservableCollection<String> _recognizedTags;
+		public Dictionary<string, List<object>> M2XMessagesReceived = new Dictionary<string, List<object>>();
 
 		public Spotter()
 		{
@@ -36,7 +39,7 @@ namespace AmbersArmy.Core.ViewModels
 			_plateReader.TextRecognized += _plateReader_TextRecognized;
 			_recognizedTags = new ObservableCollection<string>();
 
-			_m2xMqttService = AAIOC.Get<Interfaces.IM2XMqttService>();
+			_m2xService = new M2XService(Constants.M2XMasterApiKey);
 		}
 
 		public async Task InitAsync()
@@ -71,7 +74,7 @@ namespace AmbersArmy.Core.ViewModels
 
                 var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
                 var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
-                await _m2xMqttService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
+                await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
             }
         }
 
@@ -98,7 +101,7 @@ namespace AmbersArmy.Core.ViewModels
 
 			var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
 			var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
-			await _m2xMqttService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "locations", postParms);
+			await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "locations", postParms);
 		}
 
 		public async void PostLicensePlate()
@@ -112,7 +115,7 @@ namespace AmbersArmy.Core.ViewModels
 
 			var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
 			var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
-			await _m2xMqttService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
+			await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
 		}
 
 		public ICommand PostLocationCommand { get; private set; }
@@ -120,5 +123,23 @@ namespace AmbersArmy.Core.ViewModels
 		public ICommand PostLicensePlateCommand { get; private set; }
 
 		public ObservableCollection<string> RecognizedTags { get { return _recognizedTags; } }
+
+		private async void InitializeM2XServices()
+		{
+			await _m2xService.SetupMqttClient(_client_MqttMsgPublishReceived);
+		}
+
+		private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+		{
+			// keep the responses list from occupying too much memory unnecessarily.
+			if (!M2XMessagesReceived.ContainsKey(e.Topic))
+			{
+				M2XMessagesReceived.Add(e.Topic, new List<object> { Encoding.UTF8.GetString(e.Message, 0, e.Message.Length) });
+			}
+			else
+			{
+				M2XMessagesReceived[e.Topic].Add(Encoding.UTF8.GetString(e.Message, 0, e.Message.Length));
+			}
+		}
 	}
 }

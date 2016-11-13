@@ -69,28 +69,32 @@ namespace AmbersArmy.Core.Services
 			if (ApiResponses == null) { ApiResponses = new Dictionary<string, List<object>>(); }
 		}
 
-		public async Task<string> GetDeviceStream(string deviceId, string streamName)
+		public async Task PostStreamValues(string deviceId, string streamName, string values)
 		{
-			var m2xClient = new M2XClient(M2XMasterApiKey);
-			var device = m2xClient.Device(deviceId);
+			if (Client == null)
+			{
+				await SetupMqttClient(_client_MqttMsgPublishReceived);
+			}
+
+			var client = new M2XClient(apiKey: M2XMasterApiKey, deviceId: deviceId, mqttClient: Client);
+			var device = client.Device(deviceId);
 			var stream = device.Stream(streamName);
-			var requestResult = await stream.Values();
-
-			return !string.IsNullOrWhiteSpace(requestResult.Raw)
-				? requestResult.Raw
-				: string.Empty;
+			var result = await stream.PostValues(values);
 		}
 
-		public async Task<T> GetDeviceStream<T>(string deviceId, string streamName) where T : class
+		public async Task PostStreamValues<T>(string deviceId, string streamName, List<T> values)
 		{
-			var json = await GetDeviceStream(deviceId, streamName);
-			T result = !string.IsNullOrWhiteSpace(json)
-				? JsonConvert.DeserializeObject<T>(json)
-				: null;
+			if (Client == null)
+			{
+				await SetupMqttClient(_client_MqttMsgPublishReceived);
+			}
 
-			return result;
+			var client = new M2XClient(apiKey: M2XMasterApiKey, deviceId: deviceId, mqttClient: Client);
+			var device = client.Device(deviceId);
+			var stream = device.Stream(streamName);
+			var result = await stream.PostValues(values);
 		}
-		
+
 		private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
 		{
 			// keep the responses list from occupying too much memory unnecessarily.
@@ -106,7 +110,7 @@ namespace AmbersArmy.Core.Services
 			}
 		}
 
-		public async Task SetupMqttClient()
+		public async Task SetupMqttClient(MqttClient.MqttMsgPublishEventHandler subscriptionHandler = null)
 		{
 			var hostNameIpAddress = string.Empty;
 			var hn = new Windows.Networking.HostName(ApiEndpointHostName);
@@ -116,7 +120,7 @@ namespace AmbersArmy.Core.Services
 				hostNameIpAddress = socket.Information.RemoteAddress.DisplayName;
 			}
 			Client = new MqttClient(hostNameIpAddress);
-			Client.MqttMsgPublishReceived += _client_MqttMsgPublishReceived;
+			Client.MqttMsgPublishReceived += subscriptionHandler != null ? subscriptionHandler : _client_MqttMsgPublishReceived;
 			Client.Connect(ClientId, M2XMasterApiKey, null);
 			if (Client.IsConnected)
 			{

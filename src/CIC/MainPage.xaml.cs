@@ -53,16 +53,9 @@ namespace CIC
             _cicleOfHope.Path = new Geopath(TheMap.Center.GetCirclePoints(_radius));
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-
-            var svc = new M2XService();
-            var result = await svc.GetDeviceStream("6e7bb7923219c6b72728cb1a34d0d5b6", "Temp");
-
-            var foo = result;
-            var fooCheck = string.IsNullOrWhiteSpace(result);
-            M2xResult.Text = result;
 
             TheMap.Center = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition()
             {
