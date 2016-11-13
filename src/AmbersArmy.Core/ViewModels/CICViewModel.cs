@@ -34,7 +34,7 @@ namespace AmbersArmy.Core.ViewModels
 					Latitude = 33.745239,
 					Longitude = -84.390151
 				},
-				LicensePlate = "ABC123",
+				LicensePlate = "EA375A",
 				VehicleColor = "White",
 				VehicleModel = "Ford Ranger",
 				VehicleYear = "2010",
