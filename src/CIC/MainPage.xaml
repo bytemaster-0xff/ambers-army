@@ -19,7 +19,6 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="240" />
         </Grid.ColumnDefinitions>
-        <TextBlock Name="M2xResult" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="20" />
         <StackPanel Margin="10">
             <TextBlock Text="Add Alert" FontSize="24" />
             <TextBlock Text="Name" />

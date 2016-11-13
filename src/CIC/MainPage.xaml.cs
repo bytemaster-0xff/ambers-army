@@ -34,7 +34,9 @@ namespace CIC
         List<SampleVehicle> _sampleVehicles = new List<SampleVehicle>();
         Dictionary<int, MapIcon> _carIcons = new Dictionary<int, MapIcon>();
         MapPolygon _cicleOfHope;
-        int _radius = 4000;
+        int _radius = 2000;
+        SampleVehicle _mom;
+        MapIcon _momsVehicle;
 
         public MainPage()
         {
@@ -47,6 +49,8 @@ namespace CIC
             {
                 vehicle.Update();
             }
+
+            _mom.Update();
 
             _radius += 100;
 
@@ -62,7 +66,7 @@ namespace CIC
 
             var foo = result;
             var fooCheck = string.IsNullOrWhiteSpace(result);
-            M2xResult.Text = result;
+          //  M2xResult.Text = result;
 
             TheMap.Center = new Windows.Devices.Geolocation.Geopoint(new Windows.Devices.Geolocation.BasicGeoposition()
             {
@@ -73,7 +77,8 @@ namespace CIC
 
             AddCars();
             AddCircleOfHope();
-
+            AddMom();
+         
             var timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
@@ -98,6 +103,23 @@ namespace CIC
             }
         }
 
+        private void AddMom()
+        {
+            _mom = SampleVehicle.Create(99);
+            _mom.LocationChanged += _mom_LocationChanged;
+            _momsVehicle = new MapIcon();
+            _momsVehicle.NormalizedAnchorPoint = new Point(0.5, 0.5);
+            _momsVehicle.ZIndex = 0;
+            _momsVehicle.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/ActiveClient.png"));
+            _momsVehicle.Location = new Geopoint(new BasicGeoposition() { Latitude = _mom.CurrentLocation.Lat, Longitude = _mom.CurrentLocation.Lon });
+            TheMap.MapElements.Add(_momsVehicle);
+        }
+
+        private void _mom_LocationChanged(object sender, EventArgs e)
+        {
+            _momsVehicle.Location = new Geopoint(new BasicGeoposition() { Latitude = _mom.CurrentLocation.Lat, Longitude = _mom.CurrentLocation.Lon });
+        }
+
         private void AddCircleOfHope()
         {
             _cicleOfHope = new MapPolygon()
@@ -108,6 +130,13 @@ namespace CIC
             _cicleOfHope.ZIndex = 0;
             _cicleOfHope.Path = new Geopath(TheMap.Center.GetCirclePoints(_radius));
             TheMap.MapElements.Add(_cicleOfHope);
+
+            var mapCenter = new MapIcon();
+            mapCenter.Location = TheMap.Center;
+            mapCenter.ZIndex = 100;
+            mapCenter.NormalizedAnchorPoint = new Point(0.5, 0.5);
+            mapCenter.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/MapCenter.png"));
+            TheMap.MapElements.Add(mapCenter);
         }
 
         private void Car_LocationChanged(object sender, EventArgs e)
@@ -138,7 +167,6 @@ namespace CIC
                     Debug.WriteLine($"{{new SampleGeoPos() {{Idx ={idx++},Lat={path.Latitude},Lon={path.Longitude}}}}},");
                 }
             }
-
         }
     }
 }

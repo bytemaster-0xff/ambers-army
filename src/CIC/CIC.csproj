@@ -109,6 +109,8 @@
     <None Include="CIC_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ActiveClient.png" />
+    <Content Include="Assets\MapCenter.png" />
     <Content Include="Assets\soldier_avatar.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
