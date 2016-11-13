@@ -1,8 +1,9 @@
 ﻿using AmbersArmy.Core.Services;
 using AmbersArmy.Core.Utils;
-using ATTM2X;
+
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace AmbersArmy.Core.ViewModels
 
 		FlowClient _flowClient = new FlowClient();
 		M2XService _m2xService = new M2XService(Constants.M2XMasterApiKey);
-		public Dictionary<string, List<object>> M2XMessagesReceived = new Dictionary<string, List<object>>();
+		public ObservableCollection<Models.FoundPlate> FoundPlates = new ObservableCollection<Models.FoundPlate>();
 
 		public CICViewModel()
 		{
@@ -58,16 +59,42 @@ namespace AmbersArmy.Core.ViewModels
 
 		public ICommand AddAlertCommand { get; private set; }
 
-		private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+		private async void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
 		{
-			// keep the responses list from occupying too much memory unnecessarily.
-			if (!M2XMessagesReceived.ContainsKey(e.Topic))
+			//if (!M2XMessagesReceived.ContainsKey(e.Topic))
+			//{
+			//	M2XMessagesReceived.Add(e.Topic, new List<object> { Encoding.UTF8.GetString(e.Message, 0, e.Message.Length) });
+			//}
+			//else
+			//{
+			//	M2XMessagesReceived[e.Topic].Add(Encoding.UTF8.GetString(e.Message, 0, e.Message.Length));
+			//}
+
+			if (!string.IsNullOrWhiteSpace(e.Topic) && e.Topic.ToLowerInvariant().Contains("responses"))
 			{
-				M2XMessagesReceived.Add(e.Topic, new List<object> { Encoding.UTF8.GetString(e.Message, 0, e.Message.Length) });
-			}
-			else
-			{
-				M2XMessagesReceived[e.Topic].Add(Encoding.UTF8.GetString(e.Message, 0, e.Message.Length));
+				var tempClient = new AmbersArmy.M2XProxies.Operations();
+				var data = await tempClient.GetUpdatedStreamData(Constants.M2XMasterApiKey, Constants.M2XKnownDeviceId, "licenseplate");
+				foreach (var plate in data)
+				{
+					var foundplate = new Models.FoundPlate
+					{
+						DeviceId = plate.DeviceId,
+						Plate = plate.Plate,
+						TimeStamp = plate.TimeStamp
+					};
+
+
+					if (plate != null && plate.Location != null)
+					{
+						foundplate.Location = new Models.GeoLocation
+						{
+							Latitude = plate.Location.Latitude,
+							Longitude = plate.Location.Longitude
+						};
+					}
+
+					FoundPlates.Add(foundplate);
+				}
 			}
 		}
 	}

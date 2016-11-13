@@ -79,6 +79,10 @@
     <Folder Include="GeoLocationSimulator\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AmbersArmy.M2XProxies\AmbersArmy.M2XProxies.csproj">
+      <Project>{f313ee2e-82f5-4e6e-9e2c-bc229fe9ba76}</Project>
+      <Name>AmbersArmy.M2XProxies</Name>
+    </ProjectReference>
     <ProjectReference Include="..\m2x-dot-net-mqtt\ATTM2X\ATTM2X\ATTM2X.csproj">
       <Project>{3fb0609c-66cf-4355-80fd-d37bfec1fe32}</Project>
       <Name>ATTM2X</Name>

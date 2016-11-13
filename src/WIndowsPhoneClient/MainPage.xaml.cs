@@ -35,7 +35,7 @@ namespace WIndowsPhoneClient
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            await ViewModel.InitAsync();
-        }
+			await ViewModel.InitAsync();
+		}
     }
 }

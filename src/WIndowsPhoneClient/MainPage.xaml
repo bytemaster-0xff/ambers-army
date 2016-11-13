@@ -4,30 +4,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WIndowsPhoneClient"
     xmlns:vms="using:AmbersArmy.Core.ViewModels"
+    xmlns:ctl="using:AmbersArmy.UWP.Common.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+	<Page.Resources>
+		<vms:Spotter x:Key="Spotter1" SpotterId="ACTIVEDEVICE" x:Name="ViewModel" />
+	</Page.Resources>
+
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto" />
-			<ColumnDefinition Width="Auto" />
-		</Grid.ColumnDefinitions>
-
-
-		<Image Grid.Row="0" Grid.ColumnSpan="2" Source="Assets/logo.jpg" />
-
-		<Image Grid.Row="1" Grid.Column="0" Source="Assets/AlertSymbol.jpg" />
-		<Image Grid.Row="1" Grid.Column="1" Source="Assets/ChildAbduction.jpg" />
-
+		<ctl:SpotterUI DataContext="{StaticResource Spotter1}" />
 	</Grid>
 </Page>

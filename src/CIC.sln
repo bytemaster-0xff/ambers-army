@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "WebAPI\WebAPI.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATTM2X", "m2x-dot-net-mqtt\ATTM2X\ATTM2X\ATTM2X.csproj", "{3FB0609C-66CF-4355-80FD-D37BFEC1FE32}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AmbersArmy.M2XProxies", "AmbersArmy.M2XProxies\AmbersArmy.M2XProxies.csproj", "{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -153,6 +155,22 @@ Global
 		{3FB0609C-66CF-4355-80FD-D37BFEC1FE32}.Release|x64.Build.0 = Release|Any CPU
 		{3FB0609C-66CF-4355-80FD-D37BFEC1FE32}.Release|x86.ActiveCfg = Release|Any CPU
 		{3FB0609C-66CF-4355-80FD-D37BFEC1FE32}.Release|x86.Build.0 = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|x64.Build.0 = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Debug|x86.Build.0 = Debug|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|ARM.Build.0 = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|x64.ActiveCfg = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|x64.Build.0 = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|x86.ActiveCfg = Release|Any CPU
+		{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

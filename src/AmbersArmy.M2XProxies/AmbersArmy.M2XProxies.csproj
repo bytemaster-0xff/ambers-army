@@ -5,18 +5,14 @@
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3FB0609C-66CF-4355-80FD-D37BFEC1FE32}</ProjectGuid>
+    <ProjectGuid>{F313EE2E-82F5-4E6E-9E2C-BC229FE9BA76}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ATTM2XAmbersArmy</RootNamespace>
-    <AssemblyName>ATTM2XAmbersArmy</AssemblyName>
+    <RootNamespace>AmbersArmy.M2XProxies</RootNamespace>
+    <AssemblyName>AmbersArmy.M2XProxies</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <!-- <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion> -->
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
     <TargetFrameworkProfile>Profile32</TargetFrameworkProfile>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
   </PropertyGroup>
@@ -38,37 +34,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Classes\ChartParams.cs" />
-    <Compile Include="Classes\CollectionParams.cs" />
-    <Compile Include="Classes\CommandParams.cs" />
-    <Compile Include="Classes\DeviceParams.cs" />
-    <Compile Include="Classes\DistributionParams.cs" />
-    <Compile Include="Classes\ErrorInfo.cs" />
-    <Compile Include="Classes\JobParams.cs" />
-    <Compile Include="Classes\KeyParams.cs" />
-    <Compile Include="Classes\ListParams.cs" />
-    <Compile Include="Classes\MetadataParams.cs" />
-    <Compile Include="Classes\StreamParams.cs" />
-    <Compile Include="Classes\TimeParams.cs" />
-    <Compile Include="Classes\TriggerParams.cs" />
-    <Compile Include="Enums.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="M2XClass.cs" />
-    <Compile Include="M2XClient.cs" />
-    <Compile Include="M2XDevice.cs" />
-    <Compile Include="M2XDistribution.cs" />
-    <Compile Include="M2XResponse.cs" />
-    <Compile Include="M2XStream.cs" />
+    <Compile Include="Models.cs" />
+    <Compile Include="Operations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="ATTM2X">
+      <HintPath>..\_lib\ATTM2X\ATTM2X.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="Windows, Version=8.1" />
     <TargetPlatform Include="WindowsPhoneApp, Version=8.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="M2Mqtt.WinRT">
-      <HintPath>..\_lib\M2Mqtt\M2Mqtt.WinRT\M2Mqtt.WinRT.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
