@@ -1,4 +1,5 @@
-﻿using AmbersArmy.Core.Services;
+﻿using AmbersArmy.Core.Interfaces;
+using AmbersArmy.Core.Services;
 using AmbersArmy.Core.Utils;
 
 using System;
@@ -18,7 +19,7 @@ namespace AmbersArmy.Core.ViewModels
 
 		FlowClient _flowClient = new FlowClient();
 		M2XService _m2xService = new M2XService(Constants.M2XMasterApiKey);
-		public ObservableCollection<Models.FoundPlate> FoundPlates = new ObservableCollection<Models.FoundPlate>();
+		public ObservableCollection<Models.FoundPlate> _foundPlates = new ObservableCollection<Models.FoundPlate>();
 
 		public CICViewModel()
 		{
@@ -80,7 +81,7 @@ namespace AmbersArmy.Core.ViewModels
 					{
 						DeviceId = plate.DeviceId,
 						Plate = plate.Plate,
-						TimeStamp = plate.TimeStamp
+						TimeStamp = DateTime.Now.ToString()
 					};
 
 
@@ -93,9 +94,19 @@ namespace AmbersArmy.Core.ViewModels
 						};
 					}
 
-					FoundPlates.Add(foundplate);
-				}
+                    AAIOC.Get<IDispatcherServices>().Invoke(() =>
+                    {
+                        FoundPlates.Add(foundplate);
+                    });
+
+                }
 			}
 		}
-	}
+
+        public ObservableCollection<Models.FoundPlate> FoundPlates
+        {
+            get { return _foundPlates; }
+        }
+
+    }
 }

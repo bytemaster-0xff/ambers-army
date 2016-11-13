@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AmbersArmy.Core.Interfaces;
+using AmbersArmy.Core.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -64,6 +66,10 @@ namespace CIC
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+
+            var dsp = new Helpers.DispatcherServices(rootFrame.Dispatcher);
+
+            AAIOC.RegisterSingleton<IDispatcherServices>(dsp);
 
             if (e.PrelaunchActivated == false)
             {

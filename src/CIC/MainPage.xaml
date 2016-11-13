@@ -55,5 +55,15 @@
             IsRightTapEnabled="true"
             x:Name="TheMap" >
         </Maps:MapControl>
+        <ListBox Grid.Column="2" ItemsSource="{Binding FoundPlates}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Plate}"  FontSize="24"/>
+                        <TextBlock Text="{Binding TimeStamp}" FontSize="18" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Page>

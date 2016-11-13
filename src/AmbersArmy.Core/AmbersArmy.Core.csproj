@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Interfaces\IDispatcherService.cs" />
     <Compile Include="Interfaces\ILicensePlateReader.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="Interfaces\ITimerFactory.cs" />
