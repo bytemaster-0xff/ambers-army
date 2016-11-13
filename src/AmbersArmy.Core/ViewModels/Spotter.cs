@@ -32,8 +32,7 @@ namespace AmbersArmy.Core.ViewModels
 				Longitude = -86.0
 			};
 
-
-			_plateReader = AAIOC.Get<Interfaces.ILicensePlateReader>();
+            _plateReader = AAIOC.Get<Interfaces.ILicensePlateReader>();
 			_plateReader.TextRecognized += _plateReader_TextRecognized;
 			_recognizedTags = new ObservableCollection<string>();
 
@@ -50,7 +49,7 @@ namespace AmbersArmy.Core.ViewModels
 			Debug.WriteLine("WE INIT SO START TIMER!");
 		}
 
-        private void _plateReader_TextRecognized(object sender, OCRResult e)
+        private async void _plateReader_TextRecognized(object sender, OCRResult e)
         {
             if (String.IsNullOrEmpty(e.AllText))
             {
@@ -58,15 +57,21 @@ namespace AmbersArmy.Core.ViewModels
             }
             else
             {
-                _flowClient.PostLicensePlateAysnc(new Models.FoundPlate()
-                {
-                    Plate = e.AllText,
-                    DeviceId = SpotterId,
-                    TimeStamp = DateTime.Now.ToJSONString(),
-                    Location = new GeoLocation() { Latitude = 34.3, Longitude = 33.3 }
-                });
+                 var plate =  new Models.FoundPlate()
+                    {
+                        Plate = e.AllText,
+                        DeviceId = SpotterId,
+                        TimeStamp = DateTime.Now.ToJSONString(),
+                        Location = new GeoLocation() { Latitude = 34.3, Longitude = 33.3 }
+                    };
+
+                var jsonPayload = JsonConvert.SerializeObject(plate);
 
                 Debug.WriteLine($"VALID => {e.AllText}");
+
+                var timestamp = DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:00Z");
+                var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
+                await _m2xMqttService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
             }
         }
 
