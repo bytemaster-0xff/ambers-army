@@ -41,6 +41,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Interfaces\ILicensePlateReader.cs" />
+    <Compile Include="Interfaces\IM2XMQttService.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="Interfaces\ITimerFactory.cs" />
     <Compile Include="Models\Alert.cs" />

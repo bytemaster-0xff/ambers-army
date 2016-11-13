@@ -17,8 +17,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding SpotterId}" />
-        <Button Command="{Binding PostLocationCommand}" Grid.Row="1" Background="Green" HorizontalAlignment="Center" Content="Post Location"/>
-        <ListBox ItemsSource="{Binding RecognizedTags}">
+		<Button Command="{Binding PostLocationCommand}" Grid.Row="1" Background="Green" HorizontalAlignment="Center" Content="Post Location"/>
+		<Button Command="{Binding PostLicensePlateCommand}" Grid.Row="2" Background="Orange" HorizontalAlignment="Center" Content="Post Plate"/>
+		<ListBox ItemsSource="{Binding RecognizedTags}">
             
         </ListBox>
     </Grid>
