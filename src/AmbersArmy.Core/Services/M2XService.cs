@@ -28,11 +28,6 @@ namespace AmbersArmy.Core.Services
 		private string M2XMasterApiKey { get; set; }
 		private string FlowApiKey { get; set; }
 
-		private string ApiRequestTopic
-		{
-			get { return $"m2x/{M2XMasterApiKey}/requests"; }
-		}
-
 		private string ApiCommandsTopic
 		{
 			get { return $"m2x/{M2XMasterApiKey}/commands"; }
