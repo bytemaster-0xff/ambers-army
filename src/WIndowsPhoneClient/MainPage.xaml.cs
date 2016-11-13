@@ -30,8 +30,8 @@ namespace WIndowsPhoneClient
         public MainPage()
         {
             this.InitializeComponent();
-            this.Loaded += MainPage_Loaded;
-		}
+            Loaded += MainPage_Loaded;
+        }
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {

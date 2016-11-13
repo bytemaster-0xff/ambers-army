@@ -15,6 +15,7 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Windows.Devices.Enumeration;
 
 namespace AmbersArmy.UWP.Common.LicensePlateRecog
 {
@@ -26,7 +27,7 @@ namespace AmbersArmy.UWP.Common.LicensePlateRecog
 
         public LicensePlateReader()
         {
-        //    _mediaCapture = new MediaCapture();
+            //    _mediaCapture = new MediaCapture();
             _ocrEngine = OcrEngine.TryCreateFromLanguage(new Language("en"));
         }
 
@@ -34,17 +35,21 @@ namespace AmbersArmy.UWP.Common.LicensePlateRecog
 
         public void Dispose()
         {
-            lock(this)
+            lock (this)
             {
                 _mediaCapture.Dispose();
                 _mediaCapture = null;
             }
         }
 
-        public  async Task InitAsync()
+        public async Task InitAsync()
         {
+            var videoDevices = await DeviceInformation.FindAllAsync(DeviceClass.VideoCapture);
+            var backCamera = videoDevices.FirstOrDefault(  item => item.EnclosureLocation != null && item.EnclosureLocation.Panel == Windows.Devices.Enumeration.Panel.Back);
+           
             _mediaCapture = new MediaCapture();
-            await _mediaCapture.InitializeAsync();
+            var settings = new MediaCaptureInitializationSettings { VideoDeviceId = backCamera.Id };
+            await _mediaCapture.InitializeAsync(settings);
             _mediaCapture.Failed += _mediaCapture_Failed;
         }
 
@@ -83,17 +88,19 @@ namespace AmbersArmy.UWP.Common.LicensePlateRecog
                     Lines = new List<OCRLine>()
                 };
 
-                foreach(var item in result.Lines)
+                Debug.WriteLine(result.Text);
+
+                foreach (var item in result.Lines)
                 {
                     lines.Add(new OCRLine()
                     {
-                         Text = item.Text,
-                         Words = (from wordItems 
-                                 in item.Words
+                        Text = item.Text,
+                        Words = (from wordItems
+                                in item.Words
                                  select new OCRWord()
                                  {
                                      Text = wordItems.Text,
-                                     BoundingBox =  wordItems.BoundingRect
+                                     BoundingBox = wordItems.BoundingRect
                                  }).ToList()
                     });
                 }
