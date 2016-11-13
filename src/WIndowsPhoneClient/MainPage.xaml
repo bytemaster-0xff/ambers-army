@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <vms:Spotter x:Key="Spotter1" SpotterId="ABC11111" />
+        <vms:Spotter x:Key="Spotter1" SpotterId="ACTIVEDEVICE" x:Name="ViewModel" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
