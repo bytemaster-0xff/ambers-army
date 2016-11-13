@@ -16,8 +16,8 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>WIndowsPhoneClient_TemporaryKey.pfx</PackageCertificateKeyFile>
-    <PackageCertificateThumbprint>78A8959596C13BFC5A16DAA66D014C16E26729EA</PackageCertificateThumbprint>
+    <PackageCertificateKeyFile>WindowsPhoneClient_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateThumbprint>E7C15C0DBE8914C58AD8965BEFCEE0B77711065E</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -105,9 +105,11 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="WindowsPhoneClient_StoreKey.pfx" />
     <None Include="WIndowsPhoneClient_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

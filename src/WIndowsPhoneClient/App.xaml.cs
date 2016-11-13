@@ -19,6 +19,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using ATTM2X;
+using System.Threading.Tasks;
+using Windows.Networking.PushNotifications;
+using Microsoft.WindowsAzure.Messaging;
+using System.Diagnostics;
 
 namespace WIndowsPhoneClient
 {
@@ -56,8 +60,9 @@ namespace WIndowsPhoneClient
 			AAIOC.RegisterSingleton<ILicensePlateReader, LicensePlateReader>();
 			AAIOC.RegisterSingleton<IM2XMqttService, M2XMqttService>();
 
+            InitNotificationsAsync();
 
-			var client = new M2XClient("a548ac394631771d7ec6b86da4ca35e2", "6e7bb7923219c6b72728cb1a34d0d5b6");
+            var client = new M2XClient("a548ac394631771d7ec6b86da4ca35e2", "6e7bb7923219c6b72728cb1a34d0d5b6");
 
 			// Do not repeat app initialization when the Window already has content,
 			// just ensure that the window is active
@@ -91,12 +96,31 @@ namespace WIndowsPhoneClient
 			}
 		}
 
-		/// <summary>
-		/// Invoked when Navigation to a certain page fails
-		/// </summary>
-		/// <param name="sender">The Frame which failed navigation</param>
-		/// <param name="e">Details about the navigation failure</param>
-		void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private async void InitNotificationsAsync()
+        {
+            // Get a channel URI from WNS.
+            var channel = await PushNotificationChannelManager.CreatePushNotificationChannelForApplicationAsync();
+
+            var hub = new NotificationHub("ambersarmy", "Endpoint=sb://ambersarmy.servicebus.windows.net/;SharedAccessKeyName=DefaultListenSharedAccessSignature;SharedAccessKey=Y1S8blex3Y5awZmvmvvMXwLSharNtpAQtiW6Ad8gAc0=");
+            var result = await hub.RegisterNativeAsync(channel.Uri);
+
+            // Displays the registration ID so you know it was successful
+            if (result.RegistrationId != null)
+            {
+                Debug.Write("WE WERE REGISTERED");
+            }
+            else
+            {
+                Debug.Write("NOPE NO REGISTGRATION");
+            }
+        }
+
+        /// <summary>
+        /// Invoked when Navigation to a certain page fails
+        /// </summary>
+        /// <param name="sender">The Frame which failed navigation</param>
+        /// <param name="e">Details about the navigation failure</param>
+        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
 		{
 			throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
 		}

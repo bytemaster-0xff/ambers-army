@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="de71e1ad-1693-4254-a1dd-3c10608b0a1d" Publisher="CN=kelvi" Version="1.0.0.0" />
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
+  <Identity Name="SoftwareLogisticsLLC.AmbersArmy" Publisher="CN=610EF21F-3A3C-4783-B4BF-B7C267BC0CA0" Version="1.1.0.0" />
   <mp:PhoneIdentity PhoneProductId="de71e1ad-1693-4254-a1dd-3c10608b0a1d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>WIndowsPhoneClient</DisplayName>
-    <PublisherDisplayName>kevin</PublisherDisplayName>
+    <DisplayName>Amber's Army</DisplayName>
+    <PublisherDisplayName>Software Logistics LLC</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="WIndowsPhoneClient.App">
-      <uap:VisualElements DisplayName="WIndowsPhoneClient" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="WIndowsPhoneClient" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Amber's Army" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="WIndowsPhoneClient" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
@@ -26,6 +26,7 @@
     <Capability Name="internetClient" />
     <Capability Name="internetClientServer" />
     <uap:Capability Name="picturesLibrary" />
+    <uap3:Capability Name="userNotificationListener" />
     <DeviceCapability Name="microphone" />
     <DeviceCapability Name="location" />
     <DeviceCapability Name="webcam" />

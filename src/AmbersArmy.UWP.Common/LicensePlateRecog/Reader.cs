@@ -112,7 +112,7 @@ namespace AmbersArmy.UWP.Common.LicensePlateRecog
 
         private void _mediaCapture_Failed(MediaCapture sender, MediaCaptureFailedEventArgs errorEventArgs)
         {
-            throw new NotImplementedException();
+           
         }
     }
 }
