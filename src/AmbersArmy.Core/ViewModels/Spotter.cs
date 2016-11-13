@@ -13,10 +13,11 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using ATTM2X;
 using uPLibrary.Networking.M2Mqtt.Messages;
+using System.ComponentModel;
 
 namespace AmbersArmy.Core.ViewModels
 {
-	public class Spotter
+	public class Spotter : INotifyPropertyChanged
 	{
 		FlowClient _flowClient = new FlowClient();
 		Interfaces.ILicensePlateReader _plateReader;
@@ -25,10 +26,12 @@ namespace AmbersArmy.Core.ViewModels
 		private ObservableCollection<String> _recognizedTags;
 		public Dictionary<string, List<object>> M2XMessagesReceived = new Dictionary<string, List<object>>();
 
-		public Spotter()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public Spotter()
 		{
-			PostLocationCommand = new RelayCommand(PostLocation);
-			PostLicensePlateCommand = new RelayCommand(PostLicensePlate);
+            PossibleSightingCommand = new RelayCommand(PossibleSighting);
+            PlateFoundCommand = new RelayCommand(PostPlateFoundAsync);
 			CurrentLocation = new GeoLocation()
 			{
 				Latitude = 36.99,
@@ -57,6 +60,7 @@ namespace AmbersArmy.Core.ViewModels
             if (String.IsNullOrEmpty(e.AllText))
             {
                 Debug.WriteLine("MISSING");
+                HitFound = false;
             }
             else
             {
@@ -68,6 +72,8 @@ namespace AmbersArmy.Core.ViewModels
                         Location = new GeoLocation() { Latitude = 34.3, Longitude = 33.3 }
                     };
 
+                HitFound = true;
+
                 var jsonPayload = JsonConvert.SerializeObject(plate);
 
                 Debug.WriteLine($"VALID => {e.AllText}");
@@ -76,6 +82,25 @@ namespace AmbersArmy.Core.ViewModels
 				var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
                 await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
             }
+        }
+
+        public async void PostPlateFoundAsync()
+        {
+            var plate = new Models.FoundPlate()
+            {
+                Plate = "EA375A",
+                DeviceId = SpotterId,
+                TimeStamp = DateTime.Now.ToJSONString(),
+                Location = new GeoLocation() { Latitude = 34.3, Longitude = 33.3 }
+            };
+
+            HitFound = true;
+
+            var jsonPayload = JsonConvert.SerializeObject(plate);
+           
+            var timestamp = DateTime.UtcNow.ToJSONString();//.ToString("yyyy-MM-ddTHH:mm:ssZ");
+            var postParms = $"{{ \"values\": [ {{ \"timestamp\":\"{timestamp}\", \"value\": \"{jsonPayload.Replace("\"", "&quot;")}\" }} ] }}";
+            await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
         }
 
         private async void _timer_Elapsed(object sender, EventArgs e)
@@ -89,7 +114,7 @@ namespace AmbersArmy.Core.ViewModels
 
 		public String SpotterId { get; set; }
 
-		public async void PostLocation()
+		public async void PossibleSighting()
 		{
 			var jsonPayload = JsonConvert.SerializeObject(new Models.Location()
 			{
@@ -118,9 +143,10 @@ namespace AmbersArmy.Core.ViewModels
 			await _m2xService.PostStreamValues("6e7bb7923219c6b72728cb1a34d0d5b6", "licenseplate", postParms);
 		}
 
-		public ICommand PostLocationCommand { get; private set; }
+		public ICommand PlateFoundCommand { get; private set; }
 
-		public ICommand PostLicensePlateCommand { get; private set; }
+		public ICommand PossibleSightingCommand { get; private set; }
+
 
 		public ObservableCollection<string> RecognizedTags { get { return _recognizedTags; } }
 
@@ -128,6 +154,17 @@ namespace AmbersArmy.Core.ViewModels
 		{
 			await _m2xService.SetupMqttClient(_client_MqttMsgPublishReceived);
 		}
+
+        private bool _hitFound = false;
+        public bool HitFound
+        {
+            get { return _hitFound; }
+            set
+            {
+                _hitFound = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HitFound)));
+            }
+        }
 
 		private void _client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
 		{
