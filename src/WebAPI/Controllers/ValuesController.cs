@@ -12,7 +12,7 @@ namespace WebAPI.Controllers
     public class NotificationsController : ApiController
     {
         [HttpGet()]
-        public async Task<string> Send()
+        public async Task<IHttpActionResult> Send()
         {
             var message = "Amber's Army Needs You!";
             var connectionString = "Endpoint=sb://ambersarmy.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=m6wgOgKu8SYN+xLRzUSl8ZsE+dBaeaOONChKhfYE7eU=";
@@ -25,12 +25,12 @@ namespace WebAPI.Controllers
             {
                 // Send the push notification.
                 var result = await hub.SendWindowsNativeNotificationAsync(windowsToastPayload);
-                return result.Success.ToString();
+                return Ok();
 
             }
             catch (System.Exception ex)
             {
-                return "err";
+               return Ok();
             }
         }
     }
