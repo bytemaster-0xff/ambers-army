@@ -18,7 +18,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-using ATTM2X;
 using System.Threading.Tasks;
 using Windows.Networking.PushNotifications;
 using Microsoft.WindowsAzure.Messaging;
@@ -58,11 +57,8 @@ namespace WIndowsPhoneClient
 
 			AAIOC.RegisterSingleton<ITimerFactory, TimerFactory>();
 			AAIOC.RegisterSingleton<ILicensePlateReader, LicensePlateReader>();
-			AAIOC.RegisterSingleton<IM2XMqttService, M2XMqttService>();
 
             InitNotificationsAsync();
-
-            var client = new M2XClient("a548ac394631771d7ec6b86da4ca35e2", "6e7bb7923219c6b72728cb1a34d0d5b6");
 
 			// Do not repeat app initialization when the Window already has content,
 			// just ensure that the window is active

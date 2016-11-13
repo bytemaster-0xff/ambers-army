@@ -57,7 +57,7 @@ namespace CIC
             _cicleOfHope.Path = new Geopath(TheMap.Center.GetCirclePoints(_radius));
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 

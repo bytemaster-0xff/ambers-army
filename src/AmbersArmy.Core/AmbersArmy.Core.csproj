@@ -41,7 +41,6 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Interfaces\ILicensePlateReader.cs" />
-    <Compile Include="Interfaces\IM2XMQttService.cs" />
     <Compile Include="Interfaces\ITimer.cs" />
     <Compile Include="Interfaces\ITimerFactory.cs" />
     <Compile Include="Models\Alert.cs" />
@@ -65,11 +64,8 @@
     <Compile Include="ViewModels\Spotter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ATTM2X">
-      <HintPath>..\_lib\ATTM2X\ATTM2X.dll</HintPath>
-    </Reference>
     <Reference Include="M2Mqtt.WinRT">
-      <HintPath>..\_lib\ATTM2X-MQTT\M2Mqtt.WinRT.dll</HintPath>
+      <HintPath>..\m2x-dot-net-mqtt\ATTM2X\_lib\M2Mqtt\M2Mqtt.WinRT\M2Mqtt.WinRT.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -81,6 +77,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GeoLocationSimulator\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\m2x-dot-net-mqtt\ATTM2X\ATTM2X\ATTM2X.csproj">
+      <Project>{3fb0609c-66cf-4355-80fd-d37bfec1fe32}</Project>
+      <Name>ATTM2X</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -139,15 +139,6 @@
       <Name>AmbersArmy.UWP.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Reference Include="ATTM2X.Mqtt">
-      <HintPath>..\_lib\ATTM2X-MQTT\ATTM2X.Mqtt.dll</HintPath>
-    </Reference>
-    <Reference Include="M2Mqtt.WinRT, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\_lib\ATTM2X-MQTT\M2Mqtt.WinRT.dll</HintPath>
-    </Reference>
-  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
