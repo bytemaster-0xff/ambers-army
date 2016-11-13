@@ -42,8 +42,8 @@ namespace AmbersArmy.Core.ViewModels
         public async void InitAsync()
         {
             Debug.WriteLine("INITTING READER");
-            await _plateReader.InitAsync();
-            _timer.Start();
+           // await _plateReader.InitAsync();
+         //   _timer.Start();
             Debug.WriteLine("WE INIT SO START TIMER!");
         }
 

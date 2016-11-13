@@ -30,8 +30,8 @@ namespace AmbersArmy.Core.Models
         public String LastKnowLocationDateStamp { get; set; }
         [JsonProperty("lastKnownLocation")]
         public GeoLocation LastKnownLocation { get; set; }
-        [JsonProperty("vehicle")]
-        public String Vehicle { get; set; }
+        [JsonProperty("licensePlate")]
+        public String LicensePlate { get; set; }
         [JsonProperty("vehicleColor")]
         public String VehicleColor { get; set; }
         [JsonProperty("vehicleModel")]

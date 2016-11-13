@@ -50,11 +50,16 @@
     <Compile Include="Models\OCRLine.cs" />
     <Compile Include="Models\OCRResult.cs" />
     <Compile Include="Models\OCRWord.cs" />
+    <Compile Include="Models\SampleGeoPoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteSimulator\Routes.Route1.Partial.cs" />
+    <Compile Include="RouteSimulator\Routes.Route2.Partial.cs" />
+    <Compile Include="RouteSimulator\Routes.Route3.Partial.cs" />
     <Compile Include="Services\FlowClient.cs" />
     <Compile Include="Services\M2XService.cs" />
     <Compile Include="Utils\AAIOC.cs" />
     <Compile Include="Utils\RelayCommand.cs" />
+    <Compile Include="ViewModels\CICViewModel.cs" />
     <Compile Include="ViewModels\Spotter.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,7 +77,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GeoLocationSimulator\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
