@@ -37,6 +37,8 @@ namespace CIC
         int _radius = 2000;
         SampleVehicle _mom;
         MapIcon _momsVehicle;
+        MapIcon _foundLogo;
+        
 
         public MainPage()
         {
@@ -71,11 +73,22 @@ namespace CIC
             AddCars();
             AddCircleOfHope();
             AddMom();
-         
+            AddFound();
+
             var timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += Timer_Tick;
             timer.Start();
+        }
+
+        private void AddFound()
+        {
+            _foundLogo = new MapIcon();
+            _foundLogo.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/FoundIcon.png"));
+            _foundLogo.NormalizedAnchorPoint = new Point(0.5, 0);
+            _foundLogo.ZIndex = 0;
+
+            TheMap.MapElements.Add(_foundLogo);
         }
 
         private void AddCars()
@@ -99,6 +112,7 @@ namespace CIC
         private void AddMom()
         {
             _mom = SampleVehicle.Create(99);
+            _mom._speed = 5;
             _mom.LocationChanged += _mom_LocationChanged;
             _momsVehicle = new MapIcon();
             _momsVehicle.NormalizedAnchorPoint = new Point(0.5, 0.5);
@@ -111,6 +125,8 @@ namespace CIC
         private void _mom_LocationChanged(object sender, EventArgs e)
         {
             _momsVehicle.Location = new Geopoint(new BasicGeoposition() { Latitude = _mom.CurrentLocation.Lat, Longitude = _mom.CurrentLocation.Lon });
+            _foundLogo.Visible = ViewModel.FoundPlates.Count > 0;
+            _foundLogo.Location = _momsVehicle.Location;
         }
 
         private void AddCircleOfHope()

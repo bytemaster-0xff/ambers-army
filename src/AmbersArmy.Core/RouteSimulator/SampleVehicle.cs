@@ -10,7 +10,7 @@ namespace AmbersArmy.Core.RouteSimulator
     public class SampleVehicle 
     {
         int _carIndex;
-        int _speed;
+        public int _speed;
         int _currentIndex = 0;
         static Random _generator = new Random(DateTime.Now.Millisecond);
 

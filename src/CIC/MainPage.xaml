@@ -10,7 +10,7 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <vms:CICViewModel x:Key="cicViewModel" />
+        <vms:CICViewModel x:Key="cicViewModel" x:Name="ViewModel" />
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{StaticResource cicViewModel}">
